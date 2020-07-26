@@ -26,7 +26,13 @@ All given inputs are in lowercase letters a-z.
 public class LongestCommonPrefixString {
 
 	public static void main(String[] args) {
-		String[] strs =new String[]{"flower","flow","flight"};
+	    System.out.println(findCommonPrefixStringLength(new char[]{'a','p','a','r','n','a'}, new char[]{'a','p','r','n','a'}, 6, 5, 0));
+
+        System.out.println(findCommonPrefixStringLength(new char[]{'n','a','m','e'}, new char[]{'e','m','a','i','l'}, 4, 5, 0));
+
+
+
+        String[] strs =new String[]{"flower","flow","flight"};
 		System.out.println(longestCommonPrefix(strs));
 		strs =new String[]{"dog","racecar","car"};
 		System.out.println(longestCommonPrefix(strs));
@@ -71,5 +77,21 @@ public class LongestCommonPrefixString {
 		}
 		return str.toString();
 	}
+
+	private static int findCommonPrefixStringLength(char[] x, char[] y, int m, int n, int count){
+	    if(m <= 0 || n <= 0){
+	        return count;
+        }
+
+	    int count1 = count;
+	    if(x[m-1] == y[n-1]){
+	        count1 = findCommonPrefixStringLength(x, y, m-1, n-1, count+1);
+        }
+	    int count2 = findCommonPrefixStringLength(x, y, m-1, n, 0);
+	    int count3 = findCommonPrefixStringLength(x, y, m, n-1, 0);
+
+	    return Math.max(count1, Math.max(count2, count3));
+
+    }
 
 }
