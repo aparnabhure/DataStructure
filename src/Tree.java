@@ -11,7 +11,7 @@ public class Tree {
 
     static class Node
     {
-        private int value;
+        private int value = 0;
         private Node left;
         private Node right;
 
