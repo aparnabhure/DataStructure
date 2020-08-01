@@ -20,6 +20,12 @@ import java.util.*;
 
 public class ThreeSum {
     public static void main(String[] args){
+
+        int[] values = threeSumTwoPointers(new int[]{-3,2,-1,10,6}, 15);
+        for(int i:values) {
+            System.out.println(i);
+        }
+
         //Sample 1 : [-1, 0, 1, 2, -1, -4]
         //Sample 2: {-4,-2,1,-5,-4,-4,4,-2,0,4,0,-2,3,1,-5,0}
         //Sample 3: [0,3,0,1,1,-1,-5,-5,3,-3,-3,0]
@@ -93,6 +99,7 @@ public class ThreeSum {
     }
 
     //This is performing best
+    //This is using two pointers
     private static List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList();
         int l=0,r=0,sum=0;
@@ -157,6 +164,33 @@ public class ThreeSum {
             }
 
     }
+
+        return result;
+    }
+
+    private static int[] threeSumTwoPointers(int[] nums, int target){
+        int[] result = null;
+
+        for(int i=0; i<nums.length;i++){
+            int leftPointer = i+1;
+            int rightPointer = nums.length-1;
+            //Perform two sum
+            while (leftPointer<rightPointer){
+                int sum = nums[i] + nums[leftPointer]+ nums[rightPointer];
+                if(sum == target){
+                    return new int[]{nums[i], nums[leftPointer], nums[rightPointer]};
+                }else{
+                    int reminder = target-sum;
+                    if(reminder<nums[rightPointer]){
+                        rightPointer--;
+                    }else{
+                        leftPointer++;
+                    }
+                }
+            }
+
+
+        }
 
         return result;
     }

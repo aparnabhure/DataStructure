@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,12 @@ public class TwoSum {
             System.out.println(" {" +result[0] + ", "+ result[1]+"}");
         }
 
+        result = usingSorting(items, target);
+        if(result == null){
+            System.out.println("Set not found");
+        }else{
+            System.out.println(" {" +result[0] + ", "+ result[1]+"}");
+        }
     }
 
     /**
@@ -67,6 +74,29 @@ public class TwoSum {
             }
             numKeys.put(nums[i], i);
         }
+        return null;
+    }
+
+    /**
+     * O(nLog(n) which is better than O(n2)
+     * @param num
+     * @param target
+     * @return
+     */
+    private static int[] usingSorting(int[] num, int target){
+        //If using quick sort then time complexity would be log(n)
+        Arrays.sort(num);
+        for(int left=0,right = num.length-1; left<right;){
+            int sum = num[left] + num[right];
+            if(sum == target){
+                return new int[]{left, right};
+            }else if(sum < target){
+                left++;
+            }else{
+                right--;
+            }
+        }
+
         return null;
     }
 }
