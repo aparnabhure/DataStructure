@@ -43,4 +43,24 @@ public class Tree {
             this.right = right;
         }
     }
+
+    public static Tree.Node insertLevelOrder(int[] arr, Tree.Node root,
+                                              int i)
+    {
+        // Base case for recursion
+        if (i < arr.length) {
+            Tree.Node temp = new Tree.Node(arr[i]);
+            root = temp;
+
+            // insert left child
+            root.setLeft(insertLevelOrder(arr, root.getLeft(),
+                    2 * i + 1));
+
+            // insert right child
+            root.setRight(insertLevelOrder(arr, root.getRight(),
+                    2 * i + 2));
+        }
+        return root;
+    }
+
 }
