@@ -1,5 +1,7 @@
 import com.sun.xml.internal.ws.util.StringUtils;
 
+
+
 import java.util.Stack;
 
 public class ThousandSeparator {
@@ -13,6 +15,8 @@ public class ThousandSeparator {
          System.out.println(d(93387));
          System.out.println(d(777111987));
     }
+
+
     private static String d(int n){
 
         if(n <1000){
