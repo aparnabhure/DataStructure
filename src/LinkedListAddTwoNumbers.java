@@ -98,10 +98,4 @@ public class LinkedListAddTwoNumbers {
             return sumNode;
         }
     }
-
-    static class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int x) { val = x; }
-  }
 }

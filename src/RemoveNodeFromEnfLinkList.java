@@ -17,16 +17,35 @@ public class RemoveNodeFromEnfLinkList {
     public static void main(String[] args){
 
 
-        ListNode head = new ListNode(1);
-        ListNode currentNode = head;
+        ListNode head = ListNode.generatePlainList();
 
-        for(int i=2; i<6; i++){
-            ListNode listNode = new ListNode(i);
-            currentNode.next = listNode;
-            currentNode = listNode;
-        }
+//        ListNode updated = removeNthFromEndTwoPointers(head, 1);
+//        ListNode.printList(updated);
 
-        System.out.println(removeNthFromEnd(head, 2));
+        ListNode updated = removeNthFromEndTwoPointers(head, 2);
+        ListNode.printList(updated);
+
+        head = ListNode.generatePlainList();
+        updated = removeNthFromEndTwoPointers(head, 3);
+        ListNode.printList(updated);
+
+        head = ListNode.generatePlainList();
+        updated = removeNthFromEndTwoPointers(head, 4);
+        ListNode.printList(updated);
+
+        head = ListNode.generatePlainList();
+        updated = removeNthFromEndTwoPointers(head, 5);
+        ListNode.printList(updated);
+
+        head = ListNode.generatePlainList();
+        updated = removeNthFromEndTwoPointers(head, 6);
+        ListNode.printList(updated);
+
+        head = ListNode.generatePlainList();
+        updated = removeNthFromEndTwoPointers(head, 7);
+        ListNode.printList(updated);
+
+      //  System.out.println(removeNthFromEnd(head, 2));
 
     }
 
@@ -59,11 +78,33 @@ public class RemoveNodeFromEnfLinkList {
         return head;
     }
 
+    //Approach 2 : Maintain 2 pointers and move other one with Nth steps
+    private static ListNode removeNthFromEndTwoPointers(ListNode head, int n){
+        if(head == null || head.next == null){
+            return head;
+        }
 
-}
+        ListNode temp = head;
+        ListNode p1 = temp;
+        ListNode p2 = temp;
 
-class ListNode {
-    public int val;
-    public ListNode next;
-    ListNode(int x) { val = x; }
+
+        do{
+            for(int i=0; i<n; i++){
+                if(p2 == null){
+                    break;
+                }
+                p2 = p2.next;
+            }
+            if(p2 == null){
+                p1.next = p1.next.next;
+            }else{
+                p1 = p1.next;
+            }
+        }while (p2 != null);
+
+        return temp;
+    }
+
+
 }

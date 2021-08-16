@@ -1,5 +1,4 @@
 import java.util.EmptyStackException;
-import java.util.Stack;
 
 /**
  * Create Stack with below operations
@@ -57,11 +56,11 @@ public class StackUsingLinkListWithMiddleOperation {
 
 
     private static class MyStack{
-        private ListNode head;
-        private ListNode last;
+        private DoublyListNode head;
+        private DoublyListNode last;
         private int len = 0;
         public void push(int value){
-            ListNode node = new ListNode(value);
+            DoublyListNode node = new DoublyListNode(value);
             if(head == null){
                 head = node;
                 last = head;
@@ -93,7 +92,7 @@ public class StackUsingLinkListWithMiddleOperation {
                 return head.value;
             }
 
-            ListNode middle = traverseTillMiddle();
+            DoublyListNode middle = traverseTillMiddle();
             return middle.value;
         }
 
@@ -101,8 +100,8 @@ public class StackUsingLinkListWithMiddleOperation {
             if(head == last){
                 push(value);
             }else{
-                ListNode middle = traverseTillMiddle();
-                ListNode newNode = new ListNode(value);
+                DoublyListNode middle = traverseTillMiddle();
+                DoublyListNode newNode = new DoublyListNode(value);
                 middle.next.prev = newNode;
                 newNode.next = middle.next;
                 newNode.prev = middle;
@@ -121,7 +120,7 @@ public class StackUsingLinkListWithMiddleOperation {
                 val = head.value;
                 head = last = null;
             }else{
-                ListNode middle = traverseTillMiddle();
+                DoublyListNode middle = traverseTillMiddle();
                 val = middle.value;
                 if(middle == head){
                     head = head.next;
@@ -139,9 +138,9 @@ public class StackUsingLinkListWithMiddleOperation {
             return len<=0;
         }
 
-        private ListNode traverseTillMiddle(){
-            ListNode tempHead = head;
-            ListNode tempLast = last;
+        private DoublyListNode traverseTillMiddle(){
+            DoublyListNode tempHead = head;
+            DoublyListNode tempLast = last;
 
             while (tempLast.next != tempHead){
                 if(tempHead == tempLast){
@@ -156,11 +155,11 @@ public class StackUsingLinkListWithMiddleOperation {
         }
     }
 
-    private static class ListNode{
+    private static class DoublyListNode {
         int value;
-        ListNode prev;
-        ListNode next;
-        ListNode(int value){
+        DoublyListNode prev;
+        DoublyListNode next;
+        DoublyListNode(int value){
             this.value = value;
         }
     }

@@ -199,10 +199,4 @@ public class ReverseSingleLinkList {
         node.next = null;
         return tHead;
     }
-
-    static class ListNode {
-        public int val;
-        public ListNode next;
-        ListNode(int x) { val = x; }
-    }
 }
