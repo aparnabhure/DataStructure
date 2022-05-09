@@ -27,7 +27,7 @@ public class RemoveDigitToMAkeMAxNumber {
         for(int i=0; i<sb.length(); i++){
             if(sb.charAt(i) == digit){
                 sb.deleteCharAt(i);
-                if(sb.compareTo(ans) >0 ){
+                if(sb.toString().compareTo(ans.toString()) >0 ){
                     ans = new StringBuilder(sb);
                 }
                 sb.insert(i, digit);
