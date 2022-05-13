@@ -4,6 +4,21 @@ import java.util.Map;
 //https://leetcode.com/contest/weekly-contest-289/problems/minimum-rounds-to-complete-all-tasks/
 public class MinimumRounds {
     public static void main(String[] args) {
+        int x = 2;
+        System.out.println(((1<<x)-1));
+
+        int y = 3;
+
+        System.out.println(((1<<x)-1)<<y);
+        int number = 0;
+        for(int i =0; i<x; i++){
+            number += 1<<i;
+        }
+        System.out.println(number);
+        System.out.println((number<<y));
+
+
+
         int[] A = new int[]{2,2,3,3,2,4,4,4,4,4};
         System.out.println(minimumRounds(A));
         A = new int[]{2,3,3};
