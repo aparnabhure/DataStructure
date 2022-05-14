@@ -20,6 +20,11 @@ public class MaxPathInTriangle {
                 {1, 1, 1, 1} };
         System.out.println(findPathSum(A, 0, 0, 4, 4));
         System.out.println(findSum(A, 4, 4));
+
+        A = new int[][]{{468, 0},
+                {335, 501} };
+        System.out.println(findPathSum(A, 0, 0, 2, 2));
+        System.out.println(findSum(A, 2, 2));
     }
 
     //Brute force way
