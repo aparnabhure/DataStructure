@@ -55,34 +55,36 @@ public class WaterFlow {
 
         // apply BFS multi source - blue lake
         while (!lack1Queue.isEmpty()) {
-            Cell cell = lack1Queue.poll();
-            // mark visited
-            visitedLack1[cell.x][cell.y] = true;
-
-            for (int i = 0; i < dx.length; i++) {
-                int x = cell.x + dx[i];
-                int y = cell.y + dy[i];
-                boolean isSafe = x >= 0 && y >= 0 && x < n && y < m;
-                if (isSafe && cell.value <= matrix[x][y] && !visitedLack1[x][y]) {
-                    lack1Queue.add(new Cell(x, y, matrix[x][y]));
-                }
-            }
+            traverse(matrix, n, m, visitedLack1, lack1Queue, dx, dy);
+//            Cell cell = lack1Queue.poll();
+//            // mark visited
+//            visitedLack1[cell.x][cell.y] = true;
+//
+//            for (int i = 0; i < dx.length; i++) {
+//                int x = cell.x + dx[i];
+//                int y = cell.y + dy[i];
+//                boolean isSafe = x >= 0 && y >= 0 && x < n && y < m;
+//                if (isSafe && cell.value <= matrix[x][y] && !visitedLack1[x][y]) {
+//                    lack1Queue.add(new Cell(x, y, matrix[x][y]));
+//                }
+//            }
         }
 
         // apply BFS multi source - red lake
         while (!lack2Queue.isEmpty()) {
-            Cell cell = lack2Queue.poll();
-            // mark visited
-            visitedLack2[cell.x][cell.y] = true;
-
-            for (int i = 0; i < dx.length; i++) {
-                int x = cell.x + dx[i];
-                int y = cell.y + dy[i];
-                boolean isSafe = x >= 0 && y >= 0 && x < n && y < m;
-                if (isSafe && cell.value <= matrix[x][y] && !visitedLack2[x][y]) {
-                    lack2Queue.add(new Cell(x, y, matrix[x][y]));
-                }
-            }
+            traverse(matrix, n, m, visitedLack2, lack2Queue, dx, dy);
+//            Cell cell = lack2Queue.poll();
+//            // mark visited
+//            visitedLack2[cell.x][cell.y] = true;
+//
+//            for (int i = 0; i < dx.length; i++) {
+//                int x = cell.x + dx[i];
+//                int y = cell.y + dy[i];
+//                boolean isSafe = x >= 0 && y >= 0 && x < n && y < m;
+//                if (isSafe && cell.value <= matrix[x][y] && !visitedLack2[x][y]) {
+//                    lack2Queue.add(new Cell(x, y, matrix[x][y]));
+//                }
+//            }
         }
 
             // find the count of common elements from both visited arrays
@@ -95,5 +97,19 @@ public class WaterFlow {
                 }
             }
             return count;
+    }
+
+    static void traverse(int[][] A, int n, int m, boolean[][] visited, Queue<Cell> queue, int[] dx, int[] dy){
+        Cell cell = queue.poll();
+        visited[cell.x][cell.y] = true;
+        //For each direct check cell value
+        for(int i=0; i<dx.length; i++){
+            int x = cell.x + dx[i];
+            int y = cell.y + dy[i];
+            boolean isInBoundary = x>=0 && y>=0 && x<n && y<m;
+            if(isInBoundary && cell.value<=A[x][y] & !visited[x][y]){
+                queue.add(new Cell(x, y, A[x][y]));
+            }
+        }
     }
 }
