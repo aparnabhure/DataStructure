@@ -1,3 +1,4 @@
+//https://www.scaler.com/academy/mentee-dashboard/class/24891/assignment/problems/14605
 public class NumberMod {
     public static void main(String[] args) {
         System.out.println((3456%4));
@@ -8,15 +9,16 @@ public class NumberMod {
         System.out.println(numberMod(A, 7));
     }
 
-    static long numberMod(int[] A, int m){
+    static int numberMod(int[] A, int m){
 
         long ans = 0;
         long exp = 1;
         for(int i=A.length-1; i>=0; i--){
             long temp = (A[i] *exp);
-            ans += temp%m;
+            //For very large input this needs to be (ans+temp)%m
+            ans = (ans+temp)%m;
             exp = (exp*10)%m;
         }
-        return ans%m;
+        return (int)ans%m;
     }
 }
