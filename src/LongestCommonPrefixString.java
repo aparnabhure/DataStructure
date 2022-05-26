@@ -61,21 +61,21 @@ public class LongestCommonPrefixString {
 			
 			
 		}
-        return newString.toString();
+        return newString;
     }
 	
 	private static String findCommonPrefix(String str1, String str2){
 		int str1Len = str1.length();
 		int str2Len = str2.length();
 		int len = Math.min(str1Len, str2Len);
-		StringBuilder str = new StringBuilder();
-		for(int i=0; i<len; i++){
+		int i =0;
+		while(i<len){
 			if(str1.charAt(i) != str2.charAt(i)){
 				break;
 			}
-			str.append(str1.charAt(i));
+			i++;
 		}
-		return str.toString();
+		return str1.substring(0, i);
 	}
 
 	private static int findCommonPrefixStringLength(char[] x, char[] y, int m, int n, int count){
