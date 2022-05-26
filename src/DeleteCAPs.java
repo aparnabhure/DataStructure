@@ -5,6 +5,7 @@ import java.util.Set;
 public class DeleteCAPs {
     public static void main(String[] args) {
         String s = "AbcaZeoB";
+
         System.out.println(update(s));
     }
 
