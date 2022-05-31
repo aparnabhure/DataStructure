@@ -15,25 +15,46 @@ import java.util.Map;
  * return [0, 1].
  */
 
+/*
+Given an array of integers, find two numbers such that they add up to a specific target number.
+
+The function twoSum should return indices of the two numbers such that they add up to the target, where index1 < index2.
+Please note that your returned answers (both index1 and index2 ) are not zero-based.
+Put both these numbers in order in an array and return the array from your function ( Looking at the function signature will make things clearer ).
+Note that, if no pair exists, return empty list.
+
+If multiple solutions exist, output the one where index2 is minimum.
+If there are multiple solutions with the minimum index2, choose the one with minimum index1 out of them.
+ */
+
 public class TwoSum {
     public static void main(String[] args){
         int[] items = new int[] {2,7,11,15};
         int target = 9;
         int[] result = bruteForceMethod(items, target);
-        if(result == null){
-            System.out.println("Set not found");
-        }else{
-            System.out.println(" {" +result[0] + ", "+ result[1]+"}");
-        }
+        print(result);
 
         result = hashMethod(items, target);
-        if(result == null){
-            System.out.println("Set not found");
-        }else{
-            System.out.println(" {" +result[0] + ", "+ result[1]+"}");
-        }
+        print(result);
 
         result = usingSorting(items, target);
+        print(result);
+
+        //Expected ans
+        //4 8
+        items = new int[] {4, 7, -4, 2, 2, 2, 3, -5, -3, 9, -4, 9, -7, 7, -1, 9, 9, 4, 1, -4, -2, 3, -3, -5, 4, -7, 7, 9, -4, 4, -8};
+        target = -3;
+        result = bruteForceMethod(items, target);
+        print(result);
+
+        result = hashMethod(items, target);
+        print(result);
+        result = usingSorting(items, target);
+        print(result);
+
+    }
+
+    static void print(int[] result){
         if(result == null){
             System.out.println("Set not found");
         }else{
@@ -71,8 +92,9 @@ public class TwoSum {
             int x = target - nums[i];
             if(numKeys.containsKey(x)){
                 return new int[]{numKeys.get(x), i};
+            }else if(!numKeys.containsKey(nums[i])){
+                numKeys.put(nums[i], i);
             }
-            numKeys.put(nums[i], i);
         }
         return null;
     }
