@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class SubSequenceSum {
@@ -9,7 +11,24 @@ public class SubSequenceSum {
         System.out.println(solve(Arrays.asList(10, 8, 19, 7, 16), 23));
     }
 
+    static class ListComparator<T extends Comparable<T>> implements Comparator<List<T>> {
+
+        @Override
+        public int compare(List<T> o1, List<T> o2) {
+            for (int i = 0; i < Math.min(o1.size(), o2.size()); i++) {
+                int c = o1.get(i).compareTo(o2.get(i));
+                if (c != 0) {
+                    return c;
+                }
+            }
+            return Integer.compare(o1.size(), o2.size());
+        }
+
+    }
+
     static void print(List<List<Integer>> result){
+        //result.sort(Comparator.comparingInt(List::size));
+        Collections.sort(result, new ListComparator<>());
         System.out.print("[");
         for(List<Integer> sub:result){
             System.out.print("[");
@@ -33,6 +52,7 @@ public class SubSequenceSum {
                     sub.add(array.get(j));
                 }
             }
+            Collections.sort(sub);
             result.add(sub);
         }
         return result;
