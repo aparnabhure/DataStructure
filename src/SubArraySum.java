@@ -12,6 +12,9 @@ public class SubArraySum {
         A = new int[]{2,5,6, 8, 3, 1, 2, 9 , 2, 3, 5, 7, 1, 2, 6, 7};
         System.out.println(sum(A, 10));
         System.out.println(sumLessB(A, 10));
+        System.out.println(subarraySum(A));
+
+        System.out.println(subarraySum(new int[]{1,2,3}));
 
     }
 
