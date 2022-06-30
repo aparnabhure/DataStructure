@@ -1,10 +1,15 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+
 //https://leetcode.com/problems/merge-intervals/submissions/
 public class MergeIntervals {
     public static void main(String[] args) {
+        Interval interval = new Interval();
+        interval.start=5735878;
+        interval.end= 14055448;
+        Interval newInterval = new Interval();
+        newInterval.start = 45639660;
+        newInterval.end = 84793834;
+        insert(Collections.singletonList(interval), newInterval);
 
         int[][] intervals = new int[][]{{2,3},{2,2},{3,3},{1,3},{5,7},{2,2},{4,6}};
         int[][] result = merge(intervals);
@@ -26,6 +31,39 @@ public class MergeIntervals {
         }
         System.out.print("]");
         System.out.println();
+    }
+
+    static class Interval {
+      int start;
+      int end;
+      Interval() { start = 0; end = 0; }
+      Interval(int s, int e) { start = s; end = e; }
+  }
+
+    static List<Interval> insert(List<Interval> intervals, Interval newInterval) {
+        int n = intervals.size();
+
+       Interval currentInterval = newInterval;
+
+        ArrayList<Interval> list= new ArrayList<>();
+
+        for(int i =0; i<n; i++){
+            Interval interval = intervals.get(i);
+            if(currentInterval.start > interval.end){
+                list.add(interval);
+            }else if(interval.start > currentInterval.end){
+                final Interval current = currentInterval;
+                list.add(current);
+                currentInterval = interval;
+            }else {
+                currentInterval.start = Math.min(currentInterval.start, interval.start);
+                currentInterval.end = Math.max(currentInterval.end, interval.end);
+            }
+
+        }
+
+        list.add(currentInterval);
+        return list;
     }
 
     static int[][] merge(int[][] intervals) {
