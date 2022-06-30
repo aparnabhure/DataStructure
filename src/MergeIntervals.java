@@ -11,6 +11,29 @@ public class MergeIntervals {
         newInterval.end = 84793834;
         insert(Collections.singletonList(interval), newInterval);
 
+        ArrayList<Interval> intervalList = new ArrayList<>();
+        interval = new Interval();
+        interval.start=2;
+        interval.end= 3;
+        intervalList.add(interval);
+        interval = new Interval();
+        interval.start=4;
+        interval.end= 5;
+        intervalList.add(interval);
+        interval = new Interval();
+        interval.start=6;
+        interval.end= 7;
+        intervalList.add(interval);
+        interval = new Interval();
+        interval.start=8;
+        interval.end= 9;
+        intervalList.add(interval);
+        interval = new Interval();
+        interval.start=1;
+        interval.end= 10;
+        intervalList.add(interval);
+        mergeIntervals(intervalList);
+
         int[][] intervals = new int[][]{{2,3},{2,2},{3,3},{1,3},{5,7},{2,2},{4,6}};
         int[][] result = merge(intervals);
         print(result);
@@ -63,6 +86,40 @@ public class MergeIntervals {
         }
 
         list.add(currentInterval);
+        return list;
+    }
+
+    static List<Interval> mergeIntervals(ArrayList<Interval> intervals) {
+        int n = intervals.size();
+
+        if(n == 1){
+            return intervals;
+        }
+
+        //Sort intervals with star point
+        intervals.sort(Comparator.comparing(x->x.start));
+
+        Interval currentInterval = intervals.get(0);
+
+        List<Interval> list= new ArrayList<>();
+
+        for(int i =1; i<n; i++){
+            Interval interval = intervals.get(i);
+            if(currentInterval.start > interval.end){
+                list.add(interval);
+            }else if(interval.start > currentInterval.end){
+                final Interval current = currentInterval;
+                list.add(current);
+                currentInterval = interval;
+            }else {
+                currentInterval.start = Math.min(currentInterval.start, interval.start);
+                currentInterval.end = Math.max(currentInterval.end, interval.end);
+            }
+
+        }
+
+        list.add(currentInterval);
+
         return list;
     }
 
