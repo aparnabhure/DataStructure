@@ -1,5 +1,6 @@
 public class PowerFactorial {
     public static void main(String[] args) {
+        System.out.println(solve(2, 27));
         System.out.println(solve(2, 3));
         System.out.println(solve(2, 6));
     }
