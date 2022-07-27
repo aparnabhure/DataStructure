@@ -32,6 +32,39 @@ public class QuickSort {
         printList(items);
     }
 
+    static void quickSort2(int[] A, int start, int end){
+        if(start>=end) return;
+        int index = rearrange(A, start, end);
+        quickSort2(A, start, index-1);
+        quickSort2(A, index+1, end);
+    }
+
+    static int rearrange(int[] A, int start, int end){
+        if(A.length == 1) return 0;
+
+        int left = start+1;
+        int right = end;
+        while(left<=right){
+            if(A[left]<=A[start]){
+                left++;
+            }else if(A[right]>A[start]){
+                right--;
+            }else{
+                int tmp = A[left];
+                A[left] = A[right];
+                A[right] = tmp;
+                left++;
+                right--;
+            }
+        }
+
+        int tmp = A[start];
+        A[start] = A[right];
+        A[right] = tmp;
+
+        return right;
+    }
+
     private static void quickSort(int[] items, int start, int end){
         if(start < end){
             int pivot = getPivot(items, start, end);//Get partition pivot
