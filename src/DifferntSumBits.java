@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /*
 We define f(X, Y) as the number of different corresponding bits in the binary representation of X and Y.
 For example, f(2, 7) = 2, since the binary representation of 2 and 7 are 010 and 111, respectively. The first and the third bit differ, so f(2, 7) = 2.
@@ -52,7 +54,13 @@ Explanation 2:
  */
 public class DifferntSumBits {
     public static void main(String[] args) {
+        int[] nums = new int[]{1,2,3,3,4,5,6,7,7,7,8,9,10};
+        System.out.println(Arrays.binarySearch(nums, 7));
+        System.out.println(Arrays.binarySearch(nums, 11));
+        System.out.println(Arrays.binarySearch(nums, 3));
+        System.out.println(Arrays.binarySearch(nums, -1));
         System.out.println(cntBits(new int[]{1, 3, 5}));
+        System.out.println(cntBits(new int[]{3,5,6,8,2}));
     }
 
     //** Bits count table approach
