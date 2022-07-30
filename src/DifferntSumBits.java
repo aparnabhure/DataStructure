@@ -55,10 +55,14 @@ Explanation 2:
 public class DifferntSumBits {
     public static void main(String[] args) {
         int[] nums = new int[]{1,2,3,3,4,5,6,7,7,7,8,9,10};
-        System.out.println(Arrays.binarySearch(nums, 7));
-        System.out.println(Arrays.binarySearch(nums, 11));
-        System.out.println(Arrays.binarySearch(nums, 3));
-        System.out.println(Arrays.binarySearch(nums, -1));
+        int ans = Arrays.binarySearch(nums, 7);
+        System.out.println(ans + " : "+ (ans<0?Math.abs(ans)-1:ans));
+        ans= Arrays.binarySearch(nums, 11);
+        System.out.println(ans + " : "+ (ans<0?Math.abs(ans)-1:ans));
+        ans = Arrays.binarySearch(nums, 3);
+        System.out.println(ans + " : "+ (ans<0?Math.abs(ans)-1:ans));
+        ans = Arrays.binarySearch(nums, -1);
+        System.out.println(ans + " : "+ (ans<0?Math.abs(ans)-1:ans));
         System.out.println(cntBits(new int[]{1, 3, 5}));
         System.out.println(cntBits(new int[]{3,5,6,8,2}));
     }
