@@ -7,6 +7,10 @@
  */
 public class MergeSort {
     public static void main(String[] args){
+        int[] A = new int[]{0, 1, 2, 0, 1, 2};
+        mergeSort2(A, 0, A.length-1);
+        printList(A);
+
         int items[] = new int[7];
         items[0] = 10;
         items[1] = 3;
@@ -18,6 +22,48 @@ public class MergeSort {
         printList(items);
         mergeSort(items, 0, items.length-1);
         printList(items);
+    }
+
+    private static int mergeSort2(int[] A, int start, int end){
+        if(start==end) return 0;
+        int mid = (start+end)/2;
+        int left = mergeSort2(A, start, mid);
+        int right = mergeSort2(A, mid+1, end);
+        return left+right+merge(A, start, mid, end);
+    }
+
+    static int merge(int[] A, int start, int mid, int end){
+         int[] temp = new int[end-start+1];
+        int p1 = start;
+        int p2 = mid+1;
+        int p3=0;
+        int c = 0;
+        while(p1<=mid && p2<= end){
+            if(A[p1] <= A[p2]){
+                temp[p3] = A[p1];
+                p1++;
+            }else{
+                temp[p3]=A[p2];
+                p2++;
+                c+=(mid-p1+1);
+            }
+            p3++;
+        }
+
+        while(p1<=mid){
+            temp[p3++]=A[p1++];
+        }
+
+        while(p2<=end){
+            temp[p3++]=A[p2++];
+        }
+
+        //copy to A
+        for(int i=start,j=0; i<=end; i++,j++){
+            A[i] = temp[j];
+        }
+
+        return c;
     }
 
     private static void mergeSort(int[] items, int start, int end){

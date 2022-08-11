@@ -1,6 +1,4 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Problem:: Given an array of integers, return indices of the two numbers such that they add up to a specific target.
@@ -29,6 +27,9 @@ If there are multiple solutions with the minimum index2, choose the one with min
 
 public class TwoSum {
     public static void main(String[] args){
+        System.out.println(solve(Arrays.asList(4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666, 4629666), 9259332));
+        System.out.println(solve(Arrays.asList(1, 1, 1, 2, 2, 3, 4, 5, 6, 7, 8, 9),2));
+        System.out.println(solve(Arrays.asList(1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 9, 10), 5));
         int[] items = new int[] {2,7,11,15};
         int target = 9;
         int[] result = bruteForceMethod(items, target);
@@ -52,6 +53,52 @@ public class TwoSum {
         result = usingSorting(items, target);
         print(result);
 
+    }
+
+    static int solve(List<Integer> A, int B) {
+        int n = A.size();
+        if(n<=1) return 0;
+
+        long count = 0;
+
+        int i = 0;
+        int j = n-1;
+        while(i<j){
+            int num1 = A.get(i);
+            int num2 = A.get(j);
+            int sum = num1+num2;
+            if(sum == B){
+                if(num1==num2){
+                    int x = j-i;
+                    count += (x*(x+1L))/2;
+                    break;
+                }
+                //Check for duplicates
+                int k=j;
+                long jCounts= 0;
+                while(k>=0 && A.get(j)== A.get(k)){
+                    jCounts++;
+                    k--;
+                }
+                j=k;
+
+                int l= i;
+                long iCounts=0;
+                while(l<n && A.get(i)==A.get(l)){
+                    iCounts++;
+                    l++;
+                }
+                i=l;
+
+                count+= (iCounts*jCounts);
+
+            }else if(sum >B){
+                j--;
+            }else{
+                i++;
+            }
+        }
+        return (int)(count%1000000007);
     }
 
     static void print(int[] result){
