@@ -21,6 +21,8 @@ import java.util.*;
 public class ThreeSum {
     public static void main(String[] args){
 
+        System.out.println(threeSumClosest(Arrays.asList(-5, 1, 4, -7, 10, -7, 0, 7, 3, 0, -2, -5, -3, -6, 4, -7, -8, 0, 4, 9, 4, 1, -8, -6, -6, 0, -9, 5, 3, -9, -5, -9, 6, 3, 8, -10, 1, -2, 2, 1, -9, 2, -3, 9, 9, -10, 0, -9, -2, 7, 0, -4, -3, 1, 6, -3), -1));
+
         int[] values = threeSumTwoPointers(new int[]{-3,2,-1,10,6}, 15);
         for(int i:values) {
             System.out.println(i);
@@ -51,6 +53,31 @@ public class ThreeSum {
             System.out.println("Set not found");
         }
 
+    }
+
+    static int threeSumClosest(List<Integer> A, int B) {
+        int n = A.size();
+        Collections.sort(A);
+
+        long closetSum=Integer.MAX_VALUE;
+
+        for(int i=0; i<=n-3; i++){
+            int j =i+1;
+            int k = n-1;
+            while(j<k){
+                int sum = A.get(i)+A.get(j)+A.get(k);
+                if(Math.abs(B-sum)<Math.abs(B-closetSum)){
+                    closetSum=sum;
+                }
+                if(sum>B){
+                    k--;
+                }else{
+                    j++;
+                }
+            }
+        }
+
+        return (int)closetSum;
     }
 
     public static List<List<Integer>> bruteForce(int[] nums) {
