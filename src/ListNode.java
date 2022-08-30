@@ -46,4 +46,21 @@ public class ListNode {
         }
         return head;
     }
+
+    public static ListNode generateLoopingList(List<Integer> list){
+        ListNode head = null;
+        ListNode temp = null;
+        for (int i:list){
+            ListNode node = new ListNode(i);
+            if(head == null){
+                head = node;
+                temp = head;
+            }else {
+                temp.next = node;
+                temp = temp.next;
+            }
+        }
+        temp.next = head;
+        return head;
+    }
 }
