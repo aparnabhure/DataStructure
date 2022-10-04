@@ -1,5 +1,4 @@
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 public class BClosestPointsToOrigin {
     /*
@@ -67,6 +66,9 @@ Explanation 2:
  So one closest point will be [1,-1].
      */
     public static void main(String[] args) {
+        print(solveUsingHeapPriorityQueue(Arrays.asList(new ArrayList<>(Arrays.asList(1,3)), new ArrayList<>(Arrays.asList(-2,2))),1));
+        print(solveUsingHeapPriorityQueue(Arrays.asList(new ArrayList<>(Arrays.asList(1,-1)), new ArrayList<>(Arrays.asList(2,-1))),1));
+
         int[][] result = solve(new int[][]{{1,3},{-2,2}}, 1);
         print(result);
         result = solve(new int[][]{{1,-1},{2,-1}}, 1);
@@ -80,6 +82,33 @@ Explanation 2:
         System.out.println();
     }
 
+    static void print(ArrayList<ArrayList<Integer>> result){
+        for(ArrayList<Integer> point:result){
+            System.out.println(point.get(0) + ", " + point.get(1));
+        }
+    }
+    static ArrayList<ArrayList<Integer>> solveUsingHeapPriorityQueue(List<ArrayList<Integer>> A, int B) {
+        PriorityQueue<ArrayList<Integer>> pq =new PriorityQueue<>((o1, o2) -> {
+            long x2 = (long) o1.get(0) *o1.get(0);
+            long y2 = (long) o1.get(1) *o1.get(1);
+            long X = x2+y2;
+            x2 = (long) o2.get(0) *o2.get(0);
+            y2 = (long) o2.get(1) *o2.get(1);
+            long Y = x2+y2;
+
+            return Long.compare(X, Y);
+        });
+        for(ArrayList<Integer> point: A){
+            pq.add(point);
+        }
+
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        while(B>0){
+            ans.add(pq.poll());
+            B--;
+        }
+        return ans;
+    }
     static int[][] solve(int[][] A, int B) {
 
         Arrays.sort(A, (o1, o2) -> {
