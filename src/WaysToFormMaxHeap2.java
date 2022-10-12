@@ -22,76 +22,88 @@ As the final answer can be very large return your answer modulo 109 + 7.
     static long[][] nCk = new long[MAX][MAX];
 
     public static void main(String[] args) {
-        Arrays.fill(dp, -1);
-        Arrays.fill(log, -1);
-        for(long[] row:nCk)
-            Arrays.fill(row,-1);
-
-        int ans = solve(Arrays.asList(1,1,2));
-        System.out.println(ans);
 
         Arrays.fill(dp, -1);
         Arrays.fill(log, -1);
         for(long[] row:nCk)
             Arrays.fill(row,-1);
 
-        ans = solve(Arrays.asList(1,1,2,3));
+        //expected : 509585165 (FAILED)
+        int ans = solve(Arrays.asList(1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28));
         System.out.println(ans);
 
-        Arrays.fill(dp, -1);
-        Arrays.fill(log, -1);
-        for(long[] row:nCk)
-            Arrays.fill(row,-1);
+        /********* PASSED Cases **********/
 
-        ans = solve(Arrays.asList(1,1,2,3,4));
-        System.out.println(ans);
-
-        Arrays.fill(dp, -1);
-        Arrays.fill(log, -1);
-        for(long[] row:nCk)
-            Arrays.fill(row,-1);
-
-        ans = solve(Arrays.asList(1,1,2,3,4,5));
-        System.out.println(ans);
-
-        Arrays.fill(dp, -1);
-        Arrays.fill(log, -1);
-        for(long[] row:nCk)
-            Arrays.fill(row,-1);
-
-        ans = solve(Arrays.asList(1,1,2,3,4,5,6));
-        System.out.println(ans);
-
-        Arrays.fill(dp, -1);
-        Arrays.fill(log, -1);
-        for(long[] row:nCk)
-            Arrays.fill(row,-1);
-
-        ans = solve(Arrays.asList(15, 15, 35, 48, 49, 66));
-        System.out.println(ans);
-
-        Arrays.fill(dp, -1);
-        Arrays.fill(log, -1);
-        for(long[] row:nCk)
-            Arrays.fill(row,-1);
-
-        ans = solve(Arrays.asList(20, 20, 39, 58, 64));
-        System.out.println(ans);
-
-        Arrays.fill(dp, -1);
-        Arrays.fill(log, -1);
-        for(long[] row:nCk)
-            Arrays.fill(row,-1);
-
-        ans = solve(Arrays.asList(5,1, 5));
-        System.out.println(ans);
-
-        Arrays.fill(dp, -1);
-        Arrays.fill(log, -1);
-        for(long[] row:nCk)
-            Arrays.fill(row,-1);
-        ans = solve(Arrays.asList(2,2,7));
-        System.out.println(ans);
+//        Arrays.fill(dp, -1);
+//        Arrays.fill(log, -1);
+//        for(long[] row:nCk)
+//            Arrays.fill(row,-1);
+//
+//        ans = solve(Arrays.asList(1,1,2));
+//        System.out.println(ans);
+//
+//        Arrays.fill(dp, -1);
+//        Arrays.fill(log, -1);
+//        for(long[] row:nCk)
+//            Arrays.fill(row,-1);
+//
+//        ans = solve(Arrays.asList(1,1,2,3));
+//        System.out.println(ans);
+//
+//        Arrays.fill(dp, -1);
+//        Arrays.fill(log, -1);
+//        for(long[] row:nCk)
+//            Arrays.fill(row,-1);
+//
+//        ans = solve(Arrays.asList(1,1,2,3,4));
+//        System.out.println(ans);
+//
+//        Arrays.fill(dp, -1);
+//        Arrays.fill(log, -1);
+//        for(long[] row:nCk)
+//            Arrays.fill(row,-1);
+//
+//        ans = solve(Arrays.asList(1,1,2,3,4,5));
+//        System.out.println(ans);
+//
+//        Arrays.fill(dp, -1);
+//        Arrays.fill(log, -1);
+//        for(long[] row:nCk)
+//            Arrays.fill(row,-1);
+//
+//        ans = solve(Arrays.asList(1,1,2,3,4,5,6));
+//        System.out.println(ans);
+//
+//        Arrays.fill(dp, -1);
+//        Arrays.fill(log, -1);
+//        for(long[] row:nCk)
+//            Arrays.fill(row,-1);
+//
+//        ans = solve(Arrays.asList(15, 15, 35, 48, 49, 66));
+//        System.out.println(ans);
+//
+//        Arrays.fill(dp, -1);
+//        Arrays.fill(log, -1);
+//        for(long[] row:nCk)
+//            Arrays.fill(row,-1);
+//
+//        ans = solve(Arrays.asList(20, 20, 39, 58, 64));
+//        System.out.println(ans);
+//
+//        Arrays.fill(dp, -1);
+//        Arrays.fill(log, -1);
+//        for(long[] row:nCk)
+//            Arrays.fill(row,-1);
+//
+//        ans = solve(Arrays.asList(5,1, 5));
+//        System.out.println(ans);
+//
+//        Arrays.fill(dp, -1);
+//        Arrays.fill(log, -1);
+//        for(long[] row:nCk)
+//            Arrays.fill(row,-1);
+//        ans = solve(Arrays.asList(2,2,7));
+//        System.out.println(ans);
     }
 
     static int solve(List<Integer> list){
@@ -115,19 +127,19 @@ As the final answer can be very large return your answer modulo 109 + 7.
         if(n<=3) return 1;
         if(dp[n] != -1) return dp[n];
         int height = log2(n);
-        int nodes = (1<<height);
+        int nodes = (1<<height)-1;
 
         int left = ((nodes-1)/2) + Math.min(n-nodes, (nodes+1)/2);
         int right = n-left-1;
         //If repeated min are in left subtree
-        long ans = (compute(n-3, left-2)%MOD * numberOfWays2(left)%MOD * numberOfWays(right)%MOD)%MOD;
-       // System.out.println(n + "::left::" + ans);
+        long ans = (compute(n-3, left-2) * numberOfWays2(left)%MOD * numberOfWays(right)%MOD)%MOD;
+        System.out.println(n + "::left::" + ans);
         //If repeated min are in right subtree
-        ans = (ans%MOD) + (compute(n-3, right-2)%MOD * numberOfWays(left)%MOD * numberOfWays2(right)%MOD)%MOD;
-       // System.out.println(n + "::right::" + ans);
+        ans = (ans%MOD) + (compute(n-3, right-2) * numberOfWays(left)%MOD * numberOfWays2(right)%MOD)%MOD;
+        System.out.println(n + "::right::" + ans);
         //If 1 is in left & other is in right subtree
-        ans = (ans%MOD) + (compute(n-3, left-1)%MOD * numberOfWays(left)%MOD * numberOfWays(right)%MOD)%MOD;
-       // System.out.println(n + "::both::" + ans);
+        ans = (ans%MOD) + (compute(n-3, left-1) * numberOfWays(left)%MOD * numberOfWays(right)%MOD)%MOD;
+        System.out.println(n + "::both::" + ans);
 
         dp[n] = ans%MOD;
 
@@ -145,8 +157,8 @@ As the final answer can be very large return your answer modulo 109 + 7.
 
         int left = ((nodes-1)/2) + Math.min(n-nodes, (nodes+1)/2);
         int right = n-left-1;
-        dp[n] = (compute(n-1, left)%MOD * numberOfWays(left)%MOD * numberOfWays(right)%MOD)%MOD;
-       // System.out.println(n + "::normal::" + dp[n]);
+        dp[n] = (compute(n-1, left) * numberOfWays(left)%MOD * numberOfWays(right)%MOD)%MOD;
+        System.out.println(n + "::normal::" + dp[n]);
         return dp[n];
     }
 
@@ -162,7 +174,7 @@ As the final answer can be very large return your answer modulo 109 + 7.
             return nCk[n][k];
         }
 
-        long answer = (compute(n - 1, k - 1) + compute(n - 1, k))%MOD;
+        long answer = (compute(n - 1, k - 1)%MOD + compute(n - 1, k)%MOD)%MOD;
         nCk[n][k] = answer;
         return answer;
     }
