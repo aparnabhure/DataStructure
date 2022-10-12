@@ -1,5 +1,7 @@
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class WaysToFormMaxHeap2 {
     /*
@@ -35,7 +37,7 @@ As the final answer can be very large return your answer modulo 109 + 7.
         for(long[] row:nCk)
             Arrays.fill(row,-1);
 
-        ans = solve(Arrays.asList(1,5,5));
+        ans = solve(Arrays.asList(5,1, 5));
         System.out.println(ans);
 
         Arrays.fill(dp, -1);
@@ -44,9 +46,6 @@ As the final answer can be very large return your answer modulo 109 + 7.
             Arrays.fill(row,-1);
         ans = solve(Arrays.asList(2,2,7));
         System.out.println(ans);
-
-
-
     }
 
     static int solve(List<Integer> list){
@@ -54,26 +53,14 @@ As the final answer can be very large return your answer modulo 109 + 7.
         if(n==0) return 0;
         if(n==1 || n ==2) return 1;
 
-        int[] x = new int[MAX];
-        for(int i:list){
-            x[i]++;
+        Collections.sort(list);
+        boolean minRepeating = Objects.equals(list.get(0), list.get(1));
+
+        if(minRepeating){
+            return (int)((numberOfWays2(list.size())+MOD)%MOD);
         }
 
-        boolean maxRepeating = false;
-        for(int i=x.length-1; i>=0; i--){
-            if(x[i] != 0){
-                if(x[i]>1) {
-                    maxRepeating = true;
-                }
-                break;
-            }
-        }
-
-        if(maxRepeating){
-            return (int)((numberOfWays(list.size())+MOD)%MOD);
-        }
-
-        return (int)((numberOfWays2(list.size())+MOD)%MOD);
+        return (int)((numberOfWays(list.size())+MOD)%MOD);
 
     }
 
