@@ -15,13 +15,19 @@ Find the number of structurally different Max heaps possible using all the N ele
 As the final answer can be very large return your answer modulo 109 + 7.
      */
 
+    static final int MOD = 1000000007;
+    static final int MAX = 1005;
+    static long[] dp = new long[MAX];
+    static int[] log = new int[MAX];
+    static long[][] nCk = new long[MAX][MAX];
+
     public static void main(String[] args) {
         Arrays.fill(dp, -1);
         Arrays.fill(log, -1);
         for(long[] row:nCk)
             Arrays.fill(row,-1);
 
-        int ans = solve(Arrays.asList(15, 15, 35, 48, 66));
+        int ans = solve(Arrays.asList(1,1,2));//Passed
         System.out.println(ans);
 
         Arrays.fill(dp, -1);
@@ -29,7 +35,7 @@ As the final answer can be very large return your answer modulo 109 + 7.
         for(long[] row:nCk)
             Arrays.fill(row,-1);
 
-        ans = solve(Arrays.asList(20, 20, 39, 58, 64));
+        ans = solve(Arrays.asList(1,1,2,3));//Passed
         System.out.println(ans);
 
         Arrays.fill(dp, -1);
@@ -37,15 +43,55 @@ As the final answer can be very large return your answer modulo 109 + 7.
         for(long[] row:nCk)
             Arrays.fill(row,-1);
 
-        ans = solve(Arrays.asList(5,1, 5));
+        ans = solve(Arrays.asList(1,1,2,3,4));//Passed
         System.out.println(ans);
 
         Arrays.fill(dp, -1);
         Arrays.fill(log, -1);
         for(long[] row:nCk)
             Arrays.fill(row,-1);
-        ans = solve(Arrays.asList(2,2,7));
+
+        ans = solve(Arrays.asList(1,1,2,3,4,5));//Failed
         System.out.println(ans);
+
+        Arrays.fill(dp, -1);
+        Arrays.fill(log, -1);
+        for(long[] row:nCk)
+            Arrays.fill(row,-1);
+
+        ans = solve(Arrays.asList(1,1,2,3,4,5,6));//Failed
+        System.out.println(ans);
+
+//        Arrays.fill(dp, -1);
+//        Arrays.fill(log, -1);
+//        for(long[] row:nCk)
+//            Arrays.fill(row,-1);
+//
+//        ans = solve(Arrays.asList(15, 15, 35, 48, 49, 66));
+//        System.out.println(ans);
+//
+//        Arrays.fill(dp, -1);
+//        Arrays.fill(log, -1);
+//        for(long[] row:nCk)
+//            Arrays.fill(row,-1);
+//
+//        ans = solve(Arrays.asList(20, 20, 39, 58, 64));
+//        System.out.println(ans);
+//
+//        Arrays.fill(dp, -1);
+//        Arrays.fill(log, -1);
+//        for(long[] row:nCk)
+//            Arrays.fill(row,-1);
+//
+//        ans = solve(Arrays.asList(5,1, 5));
+//        System.out.println(ans);
+//
+//        Arrays.fill(dp, -1);
+//        Arrays.fill(log, -1);
+//        for(long[] row:nCk)
+//            Arrays.fill(row,-1);
+//        ans = solve(Arrays.asList(2,2,7));
+//        System.out.println(ans);
     }
 
     static int solve(List<Integer> list){
@@ -69,7 +115,7 @@ As the final answer can be very large return your answer modulo 109 + 7.
         if(n==1 || n==2) return 1;
         if(dp[n] != -1) return dp[n];
         int height = log2(n);
-        int nodes = (1<<height)-1;
+        int nodes = (1<<height);
 
         int left = ((nodes-1)/2) + Math.min(n-nodes, (nodes+1)/2);
         int right = n-left-1;
@@ -78,19 +124,13 @@ As the final answer can be very large return your answer modulo 109 + 7.
         //If repeated min are in right subtree
         ans = (ans%MOD) + (compute(n-3, right-2)%MOD * numberOfWays(left)%MOD * numberOfWays2(right)%MOD)%MOD;
         //If 1 is in left & other is in right subtree
-        ans = (ans%MOD) + (compute(n-3, left-1)%MOD * numberOfWays(left)%MOD * numberOfWays(right)%MOD)%MOD;
+        ans = (ans%MOD) + (compute(n-3, left-1)%MOD * numberOfWays2(left)%MOD * numberOfWays2(right)%MOD)%MOD;
 
         dp[n] = ans%MOD;
 
         return dp[n];
 
     }
-
-    static final int MOD = 1000000007;
-    static final int MAX = 1005;
-    static long[] dp = new long[MAX];
-    static int[] log = new int[MAX];
-    static long[][] nCk = new long[MAX][MAX];
 
     static long numberOfWays(int n){
         if(n==0) return 0;
@@ -128,8 +168,9 @@ As the final answer can be very large return your answer modulo 109 + 7.
         if(log[n] != -1){
             return log[n];
         }
-        // calculate log2 N indirectly
-        // using log() method
-        return  (int)(Math.log(n) / Math.log(2));
+       return (int) (Math.log(n) / Math.log(2) + 1e-10);
+//        // calculate log2 N indirectly
+//        // using log() method
+//        return  (int)(Math.log(n) / Math.log(2));
     }
 }
