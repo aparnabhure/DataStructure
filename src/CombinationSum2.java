@@ -2,69 +2,73 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class CombinationSum {
+public class CombinationSum2 {
     /*
-    Given an array of candidate numbers A and a target number B, find all unique combinations in A where the candidate numbers sums to B.
+    Given an array of size N of candidate numbers A and a target number B. Return all unique combinations in A where the candidate numbers sums to B.
 
-The same repeated number may be chosen from A unlimited number of times.
+Each number in A may only be used once in the combination.
 
 Note:
 
-1) All numbers (including target) will be positive integers.
+All numbers (including target) will be positive integers.
+Elements in a combination (a1, a2, … , ak) must be in non-descending order. (ie, a1 ≤ a2 ≤ … ≤ ak).
+The solution set must not contain duplicate combinations.
+Warning:
 
-2) Elements in a combination (a1, a2, … , ak) must be in non-descending order. (ie, a1 ≤ a2 ≤ … ≤ ak).
+DO NOT USE LIBRARY FUNCTION FOR GENERATING COMBINATIONS.
 
-3) The combinations themselves must be sorted in ascending order.
-
-4) CombinationA > CombinationB iff (a1 > b1) OR (a1 = b1 AND a2 > b2) OR ... (a1 = b1 AND a2 = b2 AND ... ai = bi AND ai+1 > bi+1)
-
-5) The solution set must not contain duplicate combinations.
+Example : itertools.combinations in python. If you do, we will disqualify your submission and give you penalty points.
 
 
 
 Problem Constraints
-1 <= |A| <= 20
-
-1 <= A[i] <= 50
-
-1 <= B <= 500
+1 <= N <= 20
 
 
 
 Input Format
-The first argument is an integer array A.
-
-The second argument is integer B.
+First argument is an integer array A denoting the collection of candidate numbers.
+Second argument is an integer which represents the target number.
 
 
 
 Output Format
-Return a vector of all combinations that sum up to B.
+Return all unique combinations in A where the candidate numbers sums to B.
 
 
 
 Example Input
 Input 1:
 
-A = [2, 3]
-B = 2
+ A = [10, 1, 2, 7, 6, 1, 5]
+ B = 8
 Input 2:
 
-A = [2, 3, 6, 7]
-B = 7
+ A = [2, 1, 3]
+ B = 3
 
 
 Example Output
 Output 1:
 
-[ [2] ]
+ [
+  [1, 1, 6 ],
+  [1, 2, 5 ],
+  [1, 7 ],
+  [2, 6 ]
+ ]
 Output 2:
 
-[ [2, 2, 3] , [7] ]
+ [
+  [1, 2 ],
+  [3 ]
+ ]
      */
 
     public static void main(String[] args) {
-        print(combinationSum(new ArrayList<>(Arrays.asList( 8, 10, 6, 11, 1, 16, 8 )), 28));
+        print(combinationSum(new ArrayList<>(Arrays.asList( 10, 1, 2, 7, 6, 1, 5 )), 8));
+        print(combinationSum(new ArrayList<>(Arrays.asList( 2, 1, 3 )), 3));
+
 
     }
 
@@ -85,7 +89,7 @@ Output 2:
     }
 
     static void find(ArrayList<Integer> A, int n, int index, int target, ArrayList<Integer> permutation,
-              ArrayList<ArrayList<Integer>> ans){
+                     ArrayList<ArrayList<Integer>> ans){
         if(index >= n){
             ArrayList<Integer> temp = new ArrayList<>(permutation);
             if(target == 0 && !ans.contains(temp)){
@@ -96,7 +100,7 @@ Output 2:
 
         if(A.get(index) <= target){
             permutation.add(A.get(index));
-            find(A, n, index, (target - A.get(index)), permutation, ans);
+            find(A, n, index+1, (target - A.get(index)), permutation, ans);
             permutation.remove(permutation.size() - 1);
         }
         find(A, n, index+1, target, permutation, ans);
