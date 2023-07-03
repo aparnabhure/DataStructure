@@ -1,6 +1,15 @@
+import java.util.ArrayList;
+
 public class PrintUtil {
     static void print(int[] result){
         for(int i: result){
+            System.out.print(i+" ");
+        }
+        System.out.println();
+    }
+
+    static void print(String[] result){
+        for(String i: result){
             System.out.print(i+" ");
         }
         System.out.println();
@@ -14,6 +23,13 @@ public class PrintUtil {
                 System.out.print(result[i][j]+" ");
             }
             System.out.println();
+        }
+        System.out.println();
+    }
+
+    static void print(ArrayList<Integer> result){
+        for(int i: result){
+            System.out.print(i+" ");
         }
         System.out.println();
     }
